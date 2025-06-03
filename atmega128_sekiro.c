@@ -28,7 +28,7 @@ static void rnd_init() {
 
 // generate a value between 0 and max
 static int rnd_gen(int max) {
-	return TCNT0 % max;
+	return TCNT0 * 5 % max;
 }
 
 // BUTTON HANDLING -----------------------------------------------------------
@@ -221,8 +221,8 @@ static void lcd_change_char_line2(unsigned char a, int char_index) {
 // ARRAYS ==================================================================================
 
 // starting screen
-static char start_screen1[] = {255, 43, 252, 255, 32, 32, 32, 32, 32, 32, 32, 32, 255, 252, 43, 255};
-static char start_screen2[] = {255, 32, 32, 255, 32, 32, 32, 32, 32, 32, 32, 32, 255, 32, 32, 255};
+static char start_screen1[] = {43, 32, 32, 255, 32, 32, 32, 32, 32, 32, 32, 32, 255, 32, 32, 43};
+static char start_screen2[] = {252, 32, 32, 255, 32, 32, 32, 32, 32, 32, 32, 32, 255, 32, 32, 252};
 // empty screens
 static char empty_screen[] = {32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32};
 
@@ -327,6 +327,15 @@ static unsigned char samurai_enemy_idle[] = {
 	0b00111,
 	0b00111,
 	0b00101,
+
+	0b00001,
+	0b00110,
+	0b00110,
+	0b00010,
+	0b00111,
+	0b11111,
+	0b00111,
+	0b00101,
 };
 
 static unsigned char ronin_enemy_idle[] = {
@@ -347,6 +356,15 @@ static unsigned char ronin_enemy_idle[] = {
 	0b10111,
 	0b01111,
 	0b00101,
+
+	0b00100,
+	0b11000,
+	0b11000,
+	0b01000,
+	0b11100,
+	0b11110,
+	0b11100,
+	0b10100,
 };
 
 // MIKIRI ====================================================================
@@ -442,6 +460,28 @@ static unsigned char spear_enemy_parry[] = {
 	0b10101,
 };
 
+static unsigned char samurai_enemy_parry[] = {
+	0b10001,
+	0b10110,
+	0b10110,
+	0b10010,
+	0b01111,
+	0b00111,
+	0b00111,
+	0b00101,
+};
+
+static unsigned char ronin_enemy_parry[] = {
+	0b10001,
+	0b10110,
+	0b10110,
+	0b10010,
+	0b11111,
+	0b10111,
+	0b10111,
+	0b10101,
+};
+
 // ATTACK =========================================================================
 
 static unsigned char player_attack[] = {
@@ -484,6 +524,28 @@ static unsigned char spear_light_enemy_attack[] = {
 	0b01000,
 	0b11100,
 	0b11111,
+	0b11100,
+	0b10100,
+};
+
+static unsigned char fat_attack[] = {
+	0b00000,
+	0b01110,
+	0b01110,
+	0b00110,
+	0b11111,
+	0b11111,
+	0b01111,
+	0b01001,
+};
+
+static unsigned char samurai_enemy_attack[] = {
+	0b00100,
+	0b11000,
+	0b11000,
+	0b01000,
+	0b11100,
+	0b11100,
 	0b11100,
 	0b10100,
 };
@@ -635,6 +697,77 @@ static unsigned char spear_enemy_staggared[] = {
 	0b10101,
 };
 
+static unsigned char fat_enemy_staggared[] = {
+	0b00000,
+	0b00000,
+	0b01110,
+	0b01110,
+	0b00110,
+	0b11111,
+	0b01111,
+	0b01111,
+};
+
+static unsigned char samurai_enemy_staggared[] = {
+	0b00001,
+	0b00110,
+	0b00110,
+	0b00010,
+	0b11111,
+	0b10111,
+	0b10111,
+	0b10101,
+
+	0b00000,
+	0b00001,
+	0b00110,
+	0b00110,
+	0b00010,
+	0b11111,
+	0b10111,
+	0b10101
+};
+
+
+static unsigned char ronin_enemy_staggared[] = {
+	0b00001,
+	0b00110,
+	0b01110,
+	0b10010,
+	0b11111,
+	0b00111,
+	0b00111,
+	0b00101,
+
+	0b10001,
+	0b10110,
+	0b10110,
+	0b10010,
+	0b00111,
+	0b11111,
+	0b00111,
+	0b00101,
+
+	0b10001,
+	0b10110,
+	0b10110,
+	0b10010,
+	0b11111,
+	0b10111,
+	0b10111,
+	0b10101,
+
+	0b10000,
+	0b10001,
+	0b10110,
+	0b10110,
+	0b10010,
+	0b11111,
+	0b10111,
+	0b10101
+};
+
+
 // JUMP ========================================================================
 
 static unsigned char player_jump[] = {
@@ -718,6 +851,219 @@ static unsigned char player_jump[] = {
 	0b01110,
 	0b01010,
 	0b00000,
+};
+
+// THRUST ATTACK ================================================================
+
+static unsigned char ashigaru_thrust[] = {
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b10000,
+	0b00000,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00010,
+	0b00111,
+	0b00010,
+	0b11111,
+	0b00111,
+	0b00101,
+
+	0b00000,
+	0b00000,
+	0b10000,
+	0b00000,
+	0b10000,
+	0b11000,
+	0b10000,
+	0b10000,
+
+	0b00000,
+	0b00001,
+	0b00011,
+	0b00001,
+	0b00011,
+	0b11111,
+	0b00011,
+	0b00010,
+
+	0b00000,
+	0b10000,
+	0b11000,
+	0b10000,
+	0b11000,
+	0b11100,
+	0b11000,
+	0b01000,
+
+	0b00000,
+	0b00000,
+	0b00001,
+	0b00000,
+	0b00001,
+	0b11111,
+	0b00001,
+	0b00001,
+};
+
+static unsigned char samurai_thrust[] = {
+	0b00001,
+	0b00110,
+	0b00110,
+	0b00010,
+	0b00111,
+	0b11111,
+	0b00111,
+	0b00101,
+
+	0b10000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b10000,
+	0b10000,
+	0b10000,
+	0b10000,
+
+	0b00000,
+	0b00011,
+	0b00011,
+	0b00001,
+	0b00011,
+	0b11111,
+	0b00011,
+	0b00010,
+
+	0b01000,
+	0b10000,
+	0b10000,
+	0b10000,
+	0b11000,
+	0b11000,
+	0b11000,
+	0b01000,
+
+	0b00000,
+	0b00001,
+	0b00001,
+	0b00000,
+	0b00001,
+	0b11111,
+	0b00001,
+	0b00001,
+};
+
+static unsigned char ronin_thrust[] = {
+	0b00001,
+	0b00110,
+	0b00110,
+	0b00010,
+	0b00111,
+	0b11111,
+	0b00111,
+	0b00101,
+
+	0b10000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b10000,
+	0b11000,
+	0b10000,
+	0b10000,
+
+	0b00000,
+	0b00011,
+	0b00011,
+	0b00001,
+	0b00011,
+	0b11111,
+	0b10011,
+	0b00010,
+
+	0b01000,
+	0b10000,
+	0b10000,
+	0b10000,
+	0b11000,
+	0b11100,
+	0b11000,
+	0b01000,
+
+	0b00000,
+	0b00001,
+	0b00001,
+	0b00000,
+	0b00001,
+	0b11111,
+	0b11001,
+	0b00001,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00001,
+	0b00000,
+	0b00000,
+};
+
+// SWEEP ATTACK ================================================================
+
+static unsigned char fat_sweep[] = {
+	0b00000,
+	0b01110,
+	0b01110,
+	0b00110,
+	0b01111,
+	0b11111,
+	0b01111,
+	0b01001,
+
+	0b00000,
+	0b01110,
+	0b01110,
+	0b00110,
+	0b01111,
+	0b01111,
+	0b01111,
+	0b01001,
+
+};
+
+static unsigned char samurai_sweep[] = {
+	0b00010,
+	0b01100,
+	0b01100,
+	0b00100,
+	0b01110,
+	0b11110,
+	0b01110,
+	0b01010,
+
+	0b00010,
+	0b01100,
+	0b01100,
+	0b00100,
+	0b01110,
+	0b01111,
+	0b01110,
+	0b01010,
+
+	0b00010,
+	0b01100,
+	0b01100,
+	0b00100,
+	0b01110,
+	0b01110,
+	0b01110,
+	0b01010,
 };
 
 // DEAD =========================================================================
@@ -868,6 +1214,154 @@ static unsigned char sword_enemy_dead[] = {
 	0b00111,
 	0b00001,
 	0b00111
+};
+
+static unsigned char fat_enemy_dead[] = {
+	0b00000,
+	0b01110,
+	0b01110,
+	0b00110,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b01110,
+
+	0b00000,
+	0b00100,
+	0b01110,
+	0b00111,
+	0b11110,
+	0b11110,
+	0b11100,
+	0b11000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b11011,
+	0b11111,
+	0b11111,
+	0b11000,
+	0b11000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b01000,
+	0b11011,
+	0b11111,
+	0b11111,
+	0b11000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b11011,
+	0b11111,
+	0b11111,
+	0b11000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00001,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00011,
+	0b00001,
+	0b00001,
+	0b00011,
+	
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00111,
+	0b00011,
+	0b00011,
+	0b00111
+};
+
+static unsigned char samurai_enemy_dead[] = {
+	0b00000,
+	0b00010,
+	0b01100,
+	0b01100,
+	0b00100,
+	0b11110,
+	0b11100,
+	0b01000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b10110,
+	0b10110,
+	0b11001,
+	0b11000,
+	0b10000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b10000,
+	0b10110,
+	0b11110,
+	0b10001,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b10000,
+	0b10110,
+	0b11110,
+	0b10001,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b10110,
+	0b11110,
+	0b10001,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00001,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00001,
+	0b00111,
+	0b00011,
+	0b00111,
+	
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00111,
+	0b00011,
+	0b00111,
 };
 
 // WEAPONS ====================================================================
@@ -1099,6 +1593,15 @@ static unsigned char enemy_sword[] = {
 	0b00000,
 	0b00000,
 	0b01111,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b11100,
+	0b00000,
+	0b00000,
 };
 
 static unsigned char enemy_spear[] = {
@@ -1209,6 +1712,24 @@ static unsigned char enemy_spear[] = {
 	0b00001,
 	0b00110,
 	0b11000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00011,
+	0b00000,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00001,
+	0b00000,
+	0b00000,
 };
 
 static unsigned char enemy_axe[] = {
@@ -1237,6 +1758,51 @@ static unsigned char enemy_axe[] = {
 	0b11111,
 	0b11000,
 	0b11000,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b11111,
+	0b11000,
+	0b11000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00011,
+	0b00011,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b11100,
+	0b01100,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b11111,
+	0b00011,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b01111,
+	0b01100,
 	0b00000,
 };
 
@@ -1267,6 +1833,123 @@ static unsigned char enemy_naginata[] = {
 	0b01100,
 	0b00000,
 	0b00000,
+
+	0b00000,
+	0b10000,
+	0b11100,
+	0b01011,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00001,
+	0b11110,
+	0b01100,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00001,
+	0b00011,
+	0b00110,
+
+	0b00001,
+	0b00001,
+	0b00001,
+	0b00001,
+	0b00001,
+	0b00011,
+	0b00011,
+	0b00001,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00001,
+	0b00001,
+	0b00000,
+
+	0b00010,
+	0b00110,
+	0b00110,
+	0b00010,
+	0b00001,
+	0b00001,
+	0b00001,
+	0b00000,
+
+	0b00000,
+	0b00001,
+	0b00001,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00011,
+	0b00001,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b11100,
+	0b01000,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b11111,
+	0b00110,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b11111,
+	0b01100,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b01111,
+	0b00110,
+	0b00000,
+
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b00111,
+	0b00011,
+	0b00000,
 };
 
 // THE PROGRAM ==================================================================
@@ -1290,7 +1973,7 @@ int main() {
 	int enemy_number = 0;
 
 	// main menu
-	lcd_send_line1("     SEKIRO     ");
+	lcd_send_line1("  MINI  SEKIRO  ");
 	lcd_send_line2("    > play <    ");
 	// main menu, wait for start
 	while (button_pressed() != BUTTON_CENTER) button_unlock();
@@ -1322,57 +2005,65 @@ int main() {
 			}
 			if(enemy_number == 0) {
 				lcd_send_line1("Odachi Ashigaru ");
+				lcd_change_char_line2(32, 6);
 				lcd_send_custom_char(enemy_sword, 2, 0);
 				lcd_send_custom_char(sword_enemy_idle, 3, 0);
 				enemy_health = 3;
 				enemy_posture = 3;
 			} else if(enemy_number == 1) {
 				lcd_send_line1("Yari Ashigaru   ");
+				lcd_change_char_line2(60, 6);
 				lcd_send_custom_char(enemy_spear, 2, 0);
 				lcd_send_custom_char(spear_enemy_idle, 3, 0);
 				enemy_health = 5;
-				enemy_posture = 3;
+				enemy_posture = 10;
 			} else if(enemy_number == 2) {
 				lcd_send_line1("Ono Samurai     ");
 				lcd_send_custom_char(enemy_axe, 2, 0);
 				lcd_send_custom_char(fat_enemy_idle, 3, 0);
-				enemy_health = 9;
-				enemy_posture = 3;
+				enemy_health = 10;
+				enemy_posture = 10;
 			} else if(enemy_number == 3) {
 				lcd_send_line1("Katana Samurai  ");
 				lcd_send_custom_char(enemy_sword, 2, 0);
 				lcd_send_custom_char(samurai_enemy_idle, 3, 0);
-				enemy_health = 3;
-				enemy_posture = 9;
+				lcd_change_char_line2(62, 9);
+				enemy_health = 10;
+				enemy_posture = 15;
 			} else if(enemy_number == 4) {
 				lcd_send_line1("Naginata Ronin  ");
 				lcd_send_custom_char(enemy_naginata, 2, 0);
 				lcd_send_custom_char(ronin_enemy_idle, 3, 0);
-				enemy_health = 9;
-				enemy_posture = 9;
+				lcd_change_char_line2(32, 9);
+				enemy_health = 20;
+				enemy_posture = 25;
 			}
 			for(int k = 0; k<100; k++) for(int l=0; l<10000; l++);
 			button_unlock();
 		}
 
 		// initialize the health and posture
-		health = 3;
+		health = 5;
 		posture = 5;
 		end = 0;
 		position = 0;
 		position_length = -1;
 		enemy_position = 0;
-		enemy_position_length = -1;
+		enemy_position_length = 10;
 
 		// start of battle
 		lcd_send_line1(start_screen1);
 		lcd_send_line2(start_screen2);
 
 		// show health and posture
-		lcd_change_char_line2(health+48, 1);
-		lcd_change_char_line2(posture+48, 2);
-		lcd_change_char_line2(enemy_posture+48, 13);
-		lcd_change_char_line2(enemy_health+48, 14);
+		lcd_change_char_line1(health/10+48, 1);
+		lcd_change_char_line1(health%10+48, 2);
+		lcd_change_char_line2(posture/10+48, 1);
+		lcd_change_char_line2(posture%10+48, 2);
+		lcd_change_char_line2(enemy_posture/10+48, 13);
+		lcd_change_char_line2(enemy_posture%10+48, 14);
+		lcd_change_char_line1(enemy_health/10+48, 13);
+		lcd_change_char_line1(enemy_health%10+48, 14);
 
 		// initialize custom chars for the player
 		lcd_send_custom_char(player_idle, 0, 0);
@@ -1416,8 +2107,8 @@ int main() {
 			// THE PLAYER ==================================================================
 			// get the input from the button
 			if(end == 1) {
-				if(button == BUTTON_CENTER && (position_length == -2 || enemy_position_length == -2)) break;
-			} if(button == BUTTON_UP) {
+				if(button == BUTTON_CENTER) break;
+			} else if(button == BUTTON_UP) {
 				position = 1;
 				position_length = 20;
 			} else if(button == BUTTON_LEFT) { 
@@ -1443,8 +2134,6 @@ int main() {
 					lcd_send_custom_char(player_idle, 0, 0);
 				}
 			} else if(position == 1) { // jump
-				// write symbol
-				lcd_change_char_line1(94, 4);
 				// animate player
 				if (position_length == 20) {
 					lcd_send_custom_char(player_idle, 0, 0);
@@ -1503,15 +2192,12 @@ int main() {
 					lcd_send_custom_char(player_sword, 1, 0);
 				}
 			} else if(position == 2) { // dodge backwards
-				// write symbol
-				lcd_change_char_line1(60, 4);
 				// show player one block back
 				if (position_length == 20) {
 					lcd_send_custom_char(player_idle, 0, 0);
 					lcd_send_custom_char(player_sword, 1, 0);
 				} else if (position_length == 19) {
 					lcd_send_custom_char(player_idle, 0, 1);
-					lcd_send_custom_char(player_sword, 1, 0);
 				} else if (position_length == 18) {
 					lcd_send_custom_char(player_dodge, 4, 0);
 					lcd_send_custom_char(player_dodge, 0, 3);
@@ -1530,10 +2216,8 @@ int main() {
 					lcd_send_custom_char(player_sword, 0, 0);
 				} else if (position_length == 14) {
 					lcd_send_custom_char(player_idle, 4, 1);
-					lcd_send_custom_char(player_sword, 0, 0);
 				} else if (position_length == 6) {
 					lcd_send_custom_char(player_idle, 4, 0);
-					lcd_send_custom_char(player_sword, 0, 0);
 				} else if (position_length == 5) {
 					lcd_send_custom_char(player_dodge, 4, 2);
 					lcd_send_custom_char(player_dodge, 0, 5);
@@ -1552,20 +2236,15 @@ int main() {
 					lcd_change_char_line2(32, 5);
 				} else if (position_length == 1) {
 					lcd_send_custom_char(player_idle, 0, 0);
-					lcd_send_custom_char(player_sword, 1, 0);
 				}
 			} else if(position == 3) { // parry
-				// write symbol
-				lcd_change_char_line1(79, 4);
 				// move sword up
 				if (position_length == 25) {
 					lcd_send_custom_char(player_idle, 0, 0);
 					lcd_send_custom_char(player_sword, 1, 0);
 				} else if (position_length == 24) {
 					lcd_send_custom_char(player_idle, 0, 1);
-					lcd_send_custom_char(player_sword, 1, 0);
 				} else if (position_length == 23) {
-					lcd_send_custom_char(player_idle, 0, 1);
 					lcd_send_custom_char(player_sword, 1, 3);
 				} else if (position_length == 22) {
 					lcd_send_custom_char(player_idle, 0, 1);
@@ -1578,25 +2257,19 @@ int main() {
 					lcd_send_custom_char(player_sword, 1, 1);
 					lcd_change_char_line2(1, 7);
 				} else if (position_length == 3) {
-					lcd_send_custom_char(player_idle, 0, 1);
 					lcd_send_custom_char(player_sword, 1, 3);
 				} else if (position_length == 2) {
-					lcd_send_custom_char(player_idle, 0, 1);
 					lcd_send_custom_char(player_sword, 1, 0);
 				} else if (position_length == 1) {
 					lcd_send_custom_char(player_idle, 0, 0);
-					lcd_send_custom_char(player_sword, 1, 0);
 				}
 			} else if(position == 4) { // attack
-				// write symbol
-				lcd_change_char_line1(62, 4);
 				// move sword to attack position
 				if (position_length == 25) {
 					lcd_send_custom_char(player_idle, 0, 0);
 					lcd_send_custom_char(player_sword, 1, 0);
 				} else if (position_length == 24) {
 					lcd_send_custom_char(player_attack, 0, 0);
-					lcd_send_custom_char(player_sword, 1, 0);
 				} else if (position_length == 23) {
 					lcd_send_custom_char(player_sword, 1, 3);
 				} else if (position_length == 22) {
@@ -1611,17 +2284,20 @@ int main() {
 					lcd_send_custom_char(player_sword, 1, 2);
 					if(enemy_position == 3 && enemy_position_length>4 && enemy_position_length<27) {
 						posture = posture - 1;
-						lcd_change_char_line2(posture+48, 2);
+						lcd_change_char_line2(posture/10+48, 1);
+						lcd_change_char_line2(posture%10+48, 2);
 						if(posture == 0) {
 							position = 6;
 							position_length = 8;
 						}
 					} else if(enemy_position == 6) {
 						enemy_health = 0;
-						lcd_change_char_line2(enemy_health+48, 14);
+						lcd_change_char_line1(enemy_health/10+48, 13);
+						lcd_change_char_line1(enemy_health%10+48, 14);
 					} else {
 						enemy_health = enemy_health - 1;
-						lcd_change_char_line2(enemy_health+48, 14);
+						lcd_change_char_line1(enemy_health/10+48, 13);
+						lcd_change_char_line1(enemy_health%10+48, 14);
 					}
 				} else if (position_length == 3) {
 					lcd_send_custom_char(player_sword, 1, 4);
@@ -1632,17 +2308,13 @@ int main() {
 					lcd_send_custom_char(player_sword, 1, 0);
 				}
 			} else if(position == 5) { // mikiri counter
-				// write symbol
-				lcd_change_char_line1(118, 4);
 				// show player in mikiri pose
 				if (position_length == 20) {
 					lcd_send_custom_char(player_idle, 0, 0);
 					lcd_send_custom_char(player_sword, 1, 0);
 				} else if (position_length == 19) {
 					lcd_send_custom_char(player_idle, 0, 1);
-					lcd_send_custom_char(player_sword, 1, 0);
 				} else if (position_length == 18) {
-					lcd_send_custom_char(player_idle, 0, 1);
 					lcd_send_custom_char(player_sword, 1, 3);
 				} else if (position_length == 17) {
 					lcd_send_custom_char(player_mikiri, 0, 0);
@@ -1660,36 +2332,26 @@ int main() {
 					lcd_change_char_line2(1, 7);
 					lcd_send_custom_char(player_sword, 1, 3);
 				} else if (position_length == 2) {
-					lcd_send_custom_char(player_idle, 0, 1);
 					lcd_send_custom_char(player_sword, 1, 0);
 				} else if (position_length == 1) {
 					lcd_send_custom_char(player_idle, 0, 0);
-					lcd_send_custom_char(player_sword, 1, 0);
 				}
 			} else if(position == 6) { // staggared
-				// write symbol
-				lcd_change_char_line1(32, 4);
 				// show player in staggared pose
 				if(position_length == 8) {
 					lcd_send_custom_char(player_idle, 0, 0);
 					lcd_send_custom_char(player_sword, 1, 0);
 				} else if(position_length == 7) {
 					lcd_send_custom_char(player_idle, 0, 1);
-					lcd_send_custom_char(player_sword, 1, 0);
 				} else if(position_length == 6) {
-					lcd_send_custom_char(player_idle, 0, 1);
 					lcd_send_custom_char(player_sword, 1, 4);
 				} else if(position_length == 5) {
-					lcd_send_custom_char(player_idle, 0, 1);
 					lcd_send_custom_char(player_sword, 1, 2);
 				} else if(position_length == 4) {
-					lcd_send_custom_char(player_idle, 0, 1);
 					lcd_send_custom_char(player_sword, 1, 5);
 				} else if(position_length == 3) {
-					lcd_send_custom_char(player_idle, 0, 1);
 					lcd_send_custom_char(player_sword, 1, 6);
 				} else if(position_length == 2) {
-					lcd_send_custom_char(player_idle, 0, 1);
 					lcd_send_custom_char(player_sword, 1, 7);
 				} else if(position_length == 1) {
 					lcd_send_custom_char(player_staggared, 0, 0);
@@ -1698,16 +2360,12 @@ int main() {
 					lcd_send_custom_char(player_staggared, 0, 1);
 				}
 			} else if(position == 10) { // death
-				// write symbol
-				lcd_change_char_line1(32, 4);
 				if(position_length == 7) {
 					lcd_send_custom_char(player_idle, 0, 0);
 					lcd_send_custom_char(player_sword, 1, 0);
 				} else if(position_length == 6) {
-					lcd_send_custom_char(player_idle, 0, 0);
 					lcd_send_custom_char(player_sword, 1, 2);
 				} else if(position_length == 5) {
-					lcd_send_custom_char(player_idle, 0, 0);
 					lcd_send_custom_char(player_sword, 1, 8);
 				} else if(position_length == 4) {
 					lcd_send_custom_char(player_dead, 0, 0);
@@ -1733,8 +2391,6 @@ int main() {
 			} else if(position_length == 0 && position < 6) {
 				position = 0;
 				position_length = -1;
-				// delete symbol
-				lcd_change_char_line1(32, 4);
 				// move player to idle position
 				lcd_change_char_line1(32, 6);
 				lcd_change_char_line1(32, 7);
@@ -1749,9 +2405,11 @@ int main() {
 			} else if(position_length == 0 && position == 10) {
 				position_length = -2;
 				button_unlock();
-			} else if(position_length == 0 && position == 6) {
+			} else if(position == 6) {
 				position_length = -2;
-			} else if(position_length == -1) button_unlock();
+			} else if(position_length == -1) {
+				button_unlock();
+			} else if(position_length == -2) button_unlock();
 
 			// =============================================================================
 			// =============================================================================
@@ -1762,10 +2420,10 @@ int main() {
 			// ODACHI ASHIGARU ==================================================================
 			if(enemy_number == 0) { // if Odachi ashigaru
 				// get next move
-				if(enemy_position_length == -1 && position == 4) {
+				if(enemy_position_length == -1 && position == 4 && position_length > 8) {
 					enemy_position = 3;
 					enemy_position_length = 25;
-				} else if(enemy_position_length == -1 && random < 2) {
+				} else if(enemy_position_length == -1 && random < 10) {
 					enemy_position = 4;
 					enemy_position_length = 25;
 				}
@@ -1778,8 +2436,6 @@ int main() {
 						lcd_send_custom_char(sword_enemy_idle, 2, 1);
 					}
 				} else if(enemy_position == 3) { // parry
-					// write symbol
-					lcd_change_char_line1(79, 11);
 					// move sword up
 					if (enemy_position_length == 25) {
 						lcd_send_custom_char(sword_enemy_idle, 2, 0);
@@ -1788,10 +2444,8 @@ int main() {
 						lcd_send_custom_char(sword_enemy_idle, 2, 1);
 						lcd_send_custom_char(enemy_sword, 3, 0);
 					} else if (enemy_position_length == 23) {
-						lcd_send_custom_char(sword_enemy_idle, 2, 1);
 						lcd_send_custom_char(enemy_sword, 3, 3);
 					} else if (enemy_position_length == 22) {
-						lcd_send_custom_char(sword_enemy_idle, 2, 1);
 						lcd_send_custom_char(enemy_sword, 3, 1);
 					} else if (enemy_position_length == 21) {
 						lcd_send_custom_char(sword_enemy_parry, 2, 0);
@@ -1801,25 +2455,19 @@ int main() {
 						lcd_send_custom_char(enemy_sword, 3, 1);
 						lcd_change_char_line2(3, 8);
 					} else if (enemy_position_length == 3) {
-						lcd_send_custom_char(sword_enemy_idle, 2, 1);
 						lcd_send_custom_char(enemy_sword, 3, 3);
 					} else if (enemy_position_length == 2) {
-						lcd_send_custom_char(sword_enemy_idle, 2, 1);
 						lcd_send_custom_char(enemy_sword, 3, 0);
 					} else if (enemy_position_length == 1) {
 						lcd_send_custom_char(sword_enemy_idle, 2, 0);
-						lcd_send_custom_char(enemy_sword, 3, 0);
 					}
 				} else if(enemy_position == 4) { // attack
-					// write symbol
-					lcd_change_char_line1(60, 11);
 					// move sword to attack position
 					if (enemy_position_length == 25) {
 						lcd_send_custom_char(sword_enemy_idle, 2, 0);
 						lcd_send_custom_char(enemy_sword, 3, 0);
 					} else if (enemy_position_length == 24) {
 						lcd_send_custom_char(sword_enemy_attack, 2, 0);
-						lcd_send_custom_char(enemy_sword, 3, 0);
 					} else if (enemy_position_length == 23) {
 						lcd_send_custom_char(enemy_sword, 3, 3);
 					} else if (enemy_position_length == 22) {
@@ -1834,13 +2482,16 @@ int main() {
 						lcd_send_custom_char(enemy_sword, 3, 2);
 						if(position == 0 || position == 1 || position == 4 || position == 5) {
 							health = health - 1;
-							lcd_change_char_line2(health+48, 1);
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
 						} else if(position == 6) {
 							health = 0;
-							lcd_change_char_line2(health+48, 1);
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
 						} else if(position == 3) {
 							enemy_posture = enemy_posture - 1;
-							lcd_change_char_line2(enemy_posture+48, 13);
+							lcd_change_char_line2(enemy_posture/10+48, 13);
+							lcd_change_char_line2(enemy_posture%10+48, 14);
 							if(enemy_posture == 0) {
 								enemy_position = 6;
 								enemy_position_length = 9;
@@ -1852,32 +2503,25 @@ int main() {
 						lcd_send_custom_char(enemy_sword, 3, 0);
 					} else if (enemy_position_length == 1) {
 						lcd_send_custom_char(sword_enemy_idle, 2, 0);
-						lcd_send_custom_char(enemy_sword, 3, 0);
 					}
 				} else if(enemy_position == 6) { // staggared
 					// write symbol
 					lcd_change_char_line1(32, 11);
-					// show player in staggared pose
+					// show enemy in staggared pose
 					if(enemy_position_length == 9) {
 						lcd_send_custom_char(sword_enemy_idle, 2, 0);
 						lcd_send_custom_char(enemy_sword, 3, 0);
 					} else if(enemy_position_length == 8) {
 						lcd_send_custom_char(sword_enemy_idle, 2, 1);
-						lcd_send_custom_char(enemy_sword, 3, 0);
 					} else if(enemy_position_length == 7) {
-						lcd_send_custom_char(sword_enemy_idle, 2, 1);
 						lcd_send_custom_char(enemy_sword, 3, 4);
 					} else if(enemy_position_length == 6) {
-						lcd_send_custom_char(sword_enemy_idle, 2, 1);
 						lcd_send_custom_char(enemy_sword, 3, 2);
 					} else if(enemy_position_length == 5) {
-						lcd_send_custom_char(sword_enemy_idle, 2, 1);
 						lcd_send_custom_char(enemy_sword, 3, 5);
 					} else if(enemy_position_length == 4) {
-						lcd_send_custom_char(sword_enemy_idle, 2, 1);
 						lcd_send_custom_char(enemy_sword, 3, 6);
 					} else if(enemy_position_length == 3) {
-						lcd_send_custom_char(sword_enemy_idle, 2, 1);
 						lcd_send_custom_char(enemy_sword, 3, 7);
 					} else if(enemy_position_length == 2) {
 						lcd_send_custom_char(sword_enemy_staggared, 2, 0);
@@ -1892,10 +2536,8 @@ int main() {
 						lcd_send_custom_char(sword_enemy_idle, 2, 0);
 						lcd_send_custom_char(enemy_sword, 3, 0);
 					} else if(enemy_position_length == 7) {
-						lcd_send_custom_char(sword_enemy_idle, 2, 0);
 						lcd_send_custom_char(enemy_sword, 3, 2);
 					} else if(enemy_position_length == 6) {
-						lcd_send_custom_char(sword_enemy_idle, 2, 0);
 						lcd_send_custom_char(enemy_sword, 3, 8);
 					} else if(enemy_position_length == 5) {
 						lcd_send_custom_char(sword_enemy_dead, 2, 0);
@@ -1916,13 +2558,13 @@ int main() {
 				}
 			// YARI ASHIGARU =============================================================
 			} else if(enemy_number == 1) { // if Yari Ashigaru
-				if(enemy_position_length == -1 && position == 4 && position_length >8) {
+				if(enemy_position_length == -1 && position == 4 && position_length > 8) {
 					enemy_position = 3;
 					enemy_position_length = 25;
-				} else if(enemy_position_length == -1 && random < 10) {
+				} else if(enemy_position_length == -1 && random < 20) {
 					enemy_position = 4;
 					enemy_position_length = 25;
-				} else if(enemy_position_length == -1 && random >= 10 && random < 20) {
+				} else if(enemy_position_length == -1 && random >= 20 && random < 40) {
 					enemy_position = 8;
 					enemy_position_length = 25;
 				}
@@ -1936,8 +2578,6 @@ int main() {
 						lcd_send_custom_char(spear_enemy_idle, 2, 0);
 					}
 				} else if(enemy_position == 3) { // parry
-					// write symbol
-					lcd_change_char_line1(79, 11);
 					// move sword up
 					if (enemy_position_length == 25) {
 						lcd_send_custom_char(spear_enemy_idle, 2, 0);
@@ -1969,8 +2609,6 @@ int main() {
 						lcd_send_custom_char(enemy_spear, 3, 0);
 					}
 				} else if(enemy_position == 4) { // attack
-					// write symbol
-					lcd_change_char_line1(60, 11);
 					// move sword to attack position
 					if (enemy_position_length == 25) {
 						lcd_send_custom_char(spear_enemy_idle, 2, 0);
@@ -1979,36 +2617,33 @@ int main() {
 						lcd_send_custom_char(sword_enemy_attack, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 2);
 					} else if (enemy_position_length == 23) {
-						lcd_send_custom_char(sword_enemy_attack, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 10);
 					} else if (enemy_position_length == 10) {
-						lcd_send_custom_char(sword_enemy_attack, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 2);
 					} else if (enemy_position_length == 9) {
-						lcd_send_custom_char(sword_enemy_attack, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 5);
 					} else if (enemy_position_length == 8) {
-						lcd_send_custom_char(sword_enemy_attack, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 6);
 					} else if (enemy_position_length == 7) {
-						lcd_send_custom_char(sword_enemy_attack, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 11);
 						if(position == 0 || position == 1 || position == 4 || position == 5) {
 							health = health - 1;
-							lcd_change_char_line2(health+48, 1);
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
 						} else if(position == 6) {
 							health = 0;
-							lcd_change_char_line2(health+48, 1);
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
 						} else if(position == 3) {
 							enemy_posture = enemy_posture - 1;
-							lcd_change_char_line2(enemy_posture+48, 13);
+							lcd_change_char_line2(enemy_posture/10+48, 13);
+							lcd_change_char_line2(enemy_posture%10+48, 14);
 							if(enemy_posture == 0) {
 								enemy_position = 6;
 								enemy_position_length = 9;
 							}
 						}
 					} else if (enemy_position_length == 2) {
-						lcd_send_custom_char(sword_enemy_attack, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 6);
 					} else if (enemy_position_length == 1) {
 						lcd_send_custom_char(spear_enemy_idle, 2, 0);
@@ -2017,14 +2652,14 @@ int main() {
 				} else if(enemy_position == 6) { // staggared
 					// write symbol
 					lcd_change_char_line1(32, 11);
-					// show player in staggared pose
-					if(enemy_position_length == 5) {
+					// show enemy in staggared pose
+					if(enemy_position_length == 9) {
 						lcd_send_custom_char(spear_enemy_idle, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 0);
-					} else if(enemy_position_length == 5) {
+					} else if(enemy_position_length == 7) {
 						lcd_send_custom_char(spear_enemy_staggared, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 1);
-					} else if(enemy_position_length == 4) {
+					} else if(enemy_position_length == 5) {
 						lcd_send_custom_char(spear_enemy_staggared, 2, 1);
 						lcd_send_custom_char(enemy_spear, 3, 5);
 					} else if(enemy_position_length == 3) {
@@ -2038,32 +2673,61 @@ int main() {
 					}
 				} else if(enemy_position == 8) { // thrust attack
 					// write symbol
-					lcd_change_char_line1(60, 11);
+					lcd_change_char_line1(194, 11);
 					// move sword to attack position
 					if (enemy_position_length == 25) {
 						lcd_send_custom_char(spear_enemy_idle, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 0);
 					} else if (enemy_position_length == 24) {
-						lcd_send_custom_char(spear_enemy_idle, 2, 1);
-						lcd_send_custom_char(enemy_spear, 3, 1);
+						lcd_change_char_line2(6, 10);
+						lcd_send_custom_char(ashigaru_thrust, 6, 0);
+						lcd_send_custom_char(ashigaru_thrust, 2, 1);
+						lcd_send_custom_char(enemy_spear, 3, 12);
 					} else if (enemy_position_length == 23) {
-						lcd_send_custom_char(spear_enemy_attack, 2, 0);
+						lcd_send_custom_char(ashigaru_thrust, 6, 2);
+						lcd_send_custom_char(ashigaru_thrust, 2, 3);
+						lcd_send_custom_char(enemy_spear, 3, 13);
+					} else if (enemy_position_length == 22) {
+						lcd_send_custom_char(ashigaru_thrust, 6, 4);
+						lcd_send_custom_char(ashigaru_thrust, 2, 5);
+						lcd_change_char_line2(32, 8);
+					} else if (enemy_position_length == 21) {
+						lcd_send_custom_char(spear_enemy_idle, 6, 1);
+						lcd_send_custom_char(enemy_spear, 2, 0);
+					} else if (enemy_position_length == 11) {
+						lcd_send_custom_char(ashigaru_thrust, 6, 4);
+						lcd_send_custom_char(ashigaru_thrust, 2, 5);
+					}  else if (enemy_position_length == 10) {
+						lcd_send_custom_char(ashigaru_thrust, 6, 2);
+						lcd_send_custom_char(ashigaru_thrust, 2, 3);
+						lcd_change_char_line2(3, 8);
+						lcd_send_custom_char(enemy_spear, 3, 13);
+					}  else if (enemy_position_length == 9) {
+						lcd_send_custom_char(ashigaru_thrust, 6, 0);
+						lcd_send_custom_char(ashigaru_thrust, 2, 1);
+						lcd_send_custom_char(enemy_spear, 3, 12);
+					} else if (enemy_position_length == 8) {
+						lcd_change_char_line2(32, 10);
+						lcd_send_custom_char(spear_enemy_idle, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 0);
-					} else if (enemy_position_length == 9) {
+					} else if (enemy_position_length == 7) {
 						lcd_send_custom_char(spear_enemy_idle, 2, 1);
 						lcd_send_custom_char(enemy_spear, 3, 1);
-					} else if (enemy_position_length <= 8 && enemy_position_length >= 3) {
+					} else if (enemy_position_length <= 6 && enemy_position_length >= 3) {
 						lcd_send_custom_char(sword_enemy_attack, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 5);
 						if(enemy_position_length == 3 && (position == 0 || position == 2 || position == 3 || position == 4 || (position == 5 && (position_length > 15 || position_length <= 5)))) {
 							health = health - 1;
-							lcd_change_char_line2(health+48, 1);
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
 						} else if(position == 6) {
 							health = 0;
-							lcd_change_char_line2(health+48, 1);
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
 						} else if(position == 5 && position_length <= 15 && position_length > 5) {
 							enemy_posture = enemy_posture - 1;
-							lcd_change_char_line2(enemy_posture+48, 13);
+							lcd_change_char_line2(enemy_posture/10+48, 13);
+							lcd_change_char_line2(enemy_posture%10+48, 14);
 							if(enemy_posture == 0) {
 								enemy_position = 6;
 								enemy_position_length = 5;
@@ -2115,17 +2779,13 @@ int main() {
 						lcd_send_custom_char(sword_enemy_attack, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 5);
 					} else if (enemy_position_length == 39) {
-						lcd_send_custom_char(sword_enemy_attack, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 6);
 					} else if (enemy_position_length == 38) {
-						lcd_send_custom_char(sword_enemy_attack, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 7);
 					} else if (enemy_position_length == 4) {
-						lcd_send_custom_char(sword_enemy_attack, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 6);
 						lcd_change_char_line2(3, 8);
 					} else if (enemy_position_length == 3) {
-						lcd_send_custom_char(sword_enemy_attack, 2, 0);
 						lcd_send_custom_char(enemy_spear, 3, 5);
 					} else if (enemy_position_length == 2) {
 						lcd_send_custom_char(spear_enemy_idle, 2, 1);
@@ -2137,6 +2797,16 @@ int main() {
 				} 
 			// ONO SAMURAI ===========================================================
 			} else if(enemy_number == 2) { // if Ono Samurai
+				if(enemy_position_length == -1 && position == 4 && position_length > 8) {
+					enemy_position = 3;
+					enemy_position_length = 25;
+				} else if(enemy_position_length == -1 && random < 10) {
+					enemy_position = 7;
+					enemy_position_length = 80;
+				} else if(enemy_position_length == -1 && random >= 10 && random < 20) {
+					enemy_position = 9;
+					enemy_position_length = 40;
+				}
 				if(enemy_position == 0) { // idle pose
 					// animate enemy
 					if(loop == 0) {
@@ -2144,9 +2814,164 @@ int main() {
 					} else if (loop == 10) {
 						lcd_send_custom_char(fat_enemy_idle, 2, 1);
 					}
+				} else if(enemy_position == 3) { // parry
+					// move axe up
+					if (enemy_position_length == 25) {
+						lcd_send_custom_char(fat_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_axe, 3, 0);
+					} else if (enemy_position_length == 23) {
+						lcd_send_custom_char(fat_enemy_idle, 2, 0);
+					} else if (enemy_position_length == 21) {
+						lcd_send_custom_char(enemy_axe, 3, 1);
+					} else if (enemy_position_length == 4) {
+						lcd_send_custom_char(enemy_axe, 3, 0);
+					} else if (enemy_position_length == 2) {
+						lcd_send_custom_char(fat_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_axe, 3, 0);
+					}
+				} else if(enemy_position == 6) { // staggared
+					// write symbol
+					lcd_change_char_line1(32, 11);
+					// show enemy in staggared pose
+					if(enemy_position_length == 9) {
+						lcd_send_custom_char(fat_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_axe, 3, 0);
+					} else if(enemy_position_length == 6) {
+						lcd_send_custom_char(enemy_axe, 3, 2);
+					} else if(enemy_position_length == 3) {
+						lcd_send_custom_char(fat_enemy_staggared, 2, 0);
+						lcd_send_custom_char(enemy_axe, 3, 3);
+					} 
+				} else if(enemy_position == 7) { // heavy attack
+					// write symbol
+					lcd_change_char_line1(187, 11);
+					// move axe to attack position
+					if (enemy_position_length == 80) {
+						lcd_send_custom_char(fat_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_axe, 3, 0);
+					} else if (enemy_position_length == 79) {
+						lcd_send_custom_char(fat_enemy_idle, 2, 0);
+					} else if (enemy_position_length == 78) {
+						lcd_send_custom_char(enemy_axe, 3, 1);
+					} else if (enemy_position_length == 55) {
+						lcd_send_custom_char(enemy_axe, 3, 0);
+					} else if (enemy_position_length == 54) {
+						lcd_send_custom_char(enemy_axe, 3, 2);
+					} else if (enemy_position_length == 53) {
+						lcd_send_custom_char(fat_attack, 2, 0);
+						lcd_send_custom_char(enemy_axe, 3, 3);
+						if(position == 0 || position == 1 || position == 3|| position == 4 || position == 5) {
+							if(health>1) health = health - 2;
+							else health = 0;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						} else if(position == 6) {
+							health = 0;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						} else {
+							enemy_posture = enemy_posture - 1;
+							lcd_change_char_line2(enemy_posture/10+48, 13);
+							lcd_change_char_line2(enemy_posture%10+48, 14);
+							if(enemy_posture == 0) {
+								enemy_position = 6;
+								enemy_position_length = 9;
+							}
+						}
+					} else if (enemy_position_length == 2) {
+						lcd_send_custom_char(fat_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_axe, 3, 2);
+					} else if (enemy_position_length == 1) {
+						lcd_send_custom_char(fat_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_axe, 3, 0);
+					}
+				} else if(enemy_position == 9) { // sweep attack
+					// write symbol
+					lcd_change_char_line1(192, 11);
+					// move axe to attack position
+					if (enemy_position_length == 40) {
+						lcd_send_custom_char(fat_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_axe, 3, 0);
+					} else if (enemy_position_length == 39) {
+						lcd_send_custom_char(fat_sweep, 2, 0);
+						lcd_send_custom_char(enemy_axe, 3, 4);
+					} else if (enemy_position_length == 38) {
+						lcd_change_char_line2(32, 8);
+						lcd_send_custom_char(fat_sweep, 2, 1);
+					} else if (enemy_position_length == 37) {
+						lcd_send_custom_char(enemy_axe, 6, 5);
+						lcd_change_char_line2(6, 10);
+					} else if (enemy_position_length == 36) {
+						lcd_send_custom_char(enemy_axe, 6, 6);
+					} else if (enemy_position_length == 15) {
+						lcd_send_custom_char(enemy_axe, 6, 5);
+					} else if (enemy_position_length == 14) {
+						lcd_change_char_line2(32, 10);
+					} else if (enemy_position_length == 13) {
+						lcd_change_char_line2(3, 8);
+						lcd_send_custom_char(fat_sweep, 2, 0);
+						lcd_send_custom_char(enemy_axe, 3, 4);
+					} else if (enemy_position_length == 12) {
+						lcd_send_custom_char(fat_sweep, 2, 0);
+						lcd_send_custom_char(enemy_axe, 3, 7);
+						if(position == 0 || position == 2 || position == 3|| position == 4 || position == 5) {
+							if(health>1) health = health - 2;
+							else health = 0;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						} else if(position == 6) {
+							health = 0;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						}
+					} else if (enemy_position_length == 2) {
+						lcd_send_custom_char(enemy_axe, 3, 4);
+					} else if (enemy_position_length == 1) {
+						lcd_send_custom_char(fat_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_axe, 3, 0);
+					}
+				} else if(enemy_position == 10) { // death
+					// write symbol
+					lcd_change_char_line1(32, 11);
+					if(enemy_position_length == 7) {
+						lcd_send_custom_char(fat_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_axe, 3, 0);
+					} else if(enemy_position_length == 7) {
+						lcd_send_custom_char(enemy_axe, 3, 2);
+					} else if(enemy_position_length == 6) {
+						lcd_send_custom_char(enemy_spear, 3, 9);
+					} else if(enemy_position_length == 5) {
+						lcd_send_custom_char(fat_enemy_dead, 2, 0);
+						lcd_send_custom_char(fat_enemy_dead, 3, 5);
+					} else if(enemy_position_length == 4) {
+						lcd_send_custom_char(fat_enemy_dead, 2, 1);
+						lcd_send_custom_char(fat_enemy_dead, 3, 6);
+					} else if(enemy_position_length == 3) {
+						lcd_send_custom_char(fat_enemy_dead, 2, 2);
+						lcd_send_custom_char(fat_enemy_dead, 3, 6);
+					} else if(enemy_position_length == 2) {
+						lcd_send_custom_char(fat_enemy_dead, 2, 3);
+						lcd_send_custom_char(fat_enemy_dead, 3, 7);
+					} else if(enemy_position_length == 1) {
+						lcd_send_custom_char(fat_enemy_dead, 2, 4);
+						lcd_send_custom_char(fat_enemy_dead, 3, 7);
+					}
 				}
 			// KATANA SAMURAI ==============================================================
 			} else if(enemy_number == 3) { // if Katana Samurai
+				if(enemy_position_length == -1 && position == 4 && position_length > 8) {
+					enemy_position = 3;
+					enemy_position_length = 25;
+				} else if(enemy_position_length == -1 && random < 10) {
+					enemy_position = 4;
+					enemy_position_length = 25;
+				} else if(enemy_position_length == -1 && random >= 10 && random < 20) {
+					enemy_position = 8;
+					enemy_position_length = 25;
+				} else if(enemy_position_length == -1 && random >= 20 && random < 30) {
+					enemy_position = 9;
+					enemy_position_length = 40;
+				} 
 				if(enemy_position == 0) { // idle pose
 					// animate enemy
 					if(loop == 0) {
@@ -2154,9 +2979,287 @@ int main() {
 					} else if (loop == 10) {
 						lcd_send_custom_char(samurai_enemy_idle, 2, 1);
 					}
-				}
+				} else if(enemy_position == 3) { // parry
+					// move sword up
+					if (enemy_position_length == 25) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_sword, 3, 0);
+					} else if (enemy_position_length == 24) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 1);
+					} else if (enemy_position_length == 23) {
+						lcd_send_custom_char(enemy_sword, 3, 3);
+					} else if (enemy_position_length == 22) {
+						lcd_send_custom_char(enemy_sword, 3, 1);
+					} else if (enemy_position_length == 21) {
+						lcd_send_custom_char(samurai_enemy_parry, 2, 0);
+						lcd_change_char_line2(32, 8);
+					} else if (enemy_position_length == 4) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_sword, 3, 1);
+						lcd_change_char_line2(3, 8);
+					} else if (enemy_position_length == 3) {
+						lcd_send_custom_char(enemy_sword, 3, 3);
+					} else if (enemy_position_length == 2) {
+						lcd_send_custom_char(enemy_sword, 3, 0);
+					} else if (enemy_position_length == 1) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+					}
+				} else if(enemy_position == 4) { // attack
+					// move sword to attack position
+					if (enemy_position_length == 25) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_sword, 3, 0);
+					} else if (enemy_position_length == 24) {
+						lcd_send_custom_char(samurai_enemy_attack, 2, 0);
+						lcd_send_custom_char(enemy_sword, 3, 0);
+					} else if (enemy_position_length == 23) {
+						lcd_send_custom_char(enemy_sword, 3, 3);
+					} else if (enemy_position_length == 22) {
+						lcd_send_custom_char(enemy_sword, 3, 1);
+					} else if (enemy_position_length == 11) {
+						lcd_send_custom_char(enemy_sword, 3, 3);
+					} else if (enemy_position_length == 10) {
+						lcd_send_custom_char(enemy_sword, 3, 0);
+					} else if (enemy_position_length == 9) {
+						lcd_send_custom_char(enemy_sword, 3, 4);
+					} else if (enemy_position_length == 8) {
+						lcd_send_custom_char(enemy_sword, 3, 2);
+						if(position == 0 || position == 1 || position == 4 || position == 5) {
+							health = health - 1;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						} else if(position == 6) {
+							health = 0;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						} else if(position == 3) {
+							enemy_posture = enemy_posture - 1;
+							lcd_change_char_line2(enemy_posture/10+48, 13);
+							lcd_change_char_line2(enemy_posture%10+48, 14);
+							if(enemy_posture == 0) {
+								enemy_position = 6;
+								enemy_position_length = 9;
+							}
+						}
+					} else if (enemy_position_length == 3) {
+						lcd_send_custom_char(enemy_sword, 3, 4);
+					} else if (enemy_position_length == 2) {
+						lcd_send_custom_char(enemy_sword, 3, 0);
+					} else if (enemy_position_length == 1) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_sword, 3, 0);
+						random = rnd_gen(100);
+						if(random < 25) enemy_position_length = 30;
+					}
+				} else if(enemy_position == 6) { // staggared
+					// write symbol
+					lcd_change_char_line1(32, 11);
+					// show enemy in staggared pose
+					if(enemy_position_length == 9) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_sword, 3, 0);
+					} else if(enemy_position_length == 8) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 1);
+					} else if(enemy_position_length == 7) {
+						lcd_send_custom_char(enemy_sword, 3, 4);
+					} else if(enemy_position_length == 6) {
+						lcd_send_custom_char(enemy_sword, 3, 2);
+					} else if(enemy_position_length == 5) {
+						lcd_send_custom_char(enemy_sword, 3, 5);
+					} else if(enemy_position_length == 4) {
+						lcd_send_custom_char(enemy_sword, 3, 6);
+					} else if(enemy_position_length == 3) {
+						lcd_send_custom_char(enemy_sword, 3, 7);
+					} else if(enemy_position_length == 2) {
+						lcd_send_custom_char(samurai_enemy_staggared, 2, 0);
+						lcd_change_char_line2(32, 8);
+					} else if(enemy_position_length == 1) {
+						lcd_send_custom_char(samurai_enemy_staggared, 2, 1);
+					}
+				} else if(enemy_position == 8) { // thrust attack
+					// write symbol
+					lcd_change_char_line1(194, 11);
+					// move sword to attack position
+					if (enemy_position_length == 25) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_sword, 3, 0);
+					} else if (enemy_position_length == 24) {
+						lcd_send_custom_char(samurai_thrust, 2, 0);
+						lcd_send_custom_char(enemy_spear, 3, 12);
+					} else if (enemy_position_length == 23) {
+						lcd_change_char_line2(6, 10);
+						lcd_send_custom_char(samurai_thrust, 6, 1);
+						lcd_send_custom_char(samurai_thrust, 2, 2);
+						lcd_send_custom_char(enemy_spear, 3, 13);
+					} else if (enemy_position_length == 22) {
+						lcd_send_custom_char(samurai_thrust, 6, 3);
+						lcd_send_custom_char(samurai_thrust, 2, 4);
+						lcd_change_char_line2(32, 8);
+					} else if (enemy_position_length == 21) {
+						lcd_send_custom_char(samurai_enemy_idle, 6, 2);
+						lcd_send_custom_char(enemy_spear, 2, 0);
+					} else if (enemy_position_length == 11) {
+						lcd_send_custom_char(samurai_thrust, 6, 3);
+						lcd_send_custom_char(samurai_thrust, 2, 4);
+					}  else if (enemy_position_length == 10) {
+						lcd_send_custom_char(samurai_thrust, 6, 1);
+						lcd_send_custom_char(samurai_thrust, 2, 2);
+						lcd_change_char_line2(3, 8);
+						lcd_send_custom_char(enemy_spear, 3, 13);
+					}  else if (enemy_position_length == 9) {
+						lcd_send_custom_char(samurai_thrust, 2, 0);
+						lcd_send_custom_char(enemy_spear, 3, 12);
+					} else if (enemy_position_length == 8) {
+						lcd_change_char_line2(32, 10);
+						lcd_send_custom_char(samurai_enemy_idle, 2, 2);
+						lcd_send_custom_char(enemy_spear, 3, 0);
+					} else if (enemy_position_length == 7) {
+						lcd_send_custom_char(enemy_spear, 3, 1);
+					} else if (enemy_position_length <= 6 && enemy_position_length >= 3) {
+						lcd_send_custom_char(samurai_enemy_attack, 2, 0);
+						lcd_send_custom_char(enemy_spear, 3, 5);
+						if(enemy_position_length == 3 && (position == 0 || position == 2 || position == 3 || position == 4 || (position == 5 && (position_length > 15 || position_length <= 5)))) {
+							health = health - 1;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						} else if(position == 6) {
+							health = 0;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						} else if(position == 5 && position_length <= 15 && position_length > 5) {
+							enemy_posture = enemy_posture - 1;
+							lcd_change_char_line2(enemy_posture/10+48, 13);
+							lcd_change_char_line2(enemy_posture%10+48, 14);
+							if(enemy_posture == 0) {
+								enemy_position = 6;
+								enemy_position_length = 5;
+							} else {
+								enemy_position = 12;
+								enemy_position_length = 40;
+							}
+						}
+					} else if (enemy_position_length == 2 ) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_sword, 3, 4);
+					} else if (enemy_position_length == 1) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_sword, 3, 0);
+					}
+				} else if(enemy_position == 9) { // sweep attack
+					// write symbol
+					lcd_change_char_line1(192, 11);
+					// move axe to attack position
+					if (enemy_position_length == 40) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_sword, 3, 0);
+					} else if (enemy_position_length == 39) {
+						lcd_send_custom_char(samurai_sweep, 2, 0);
+						lcd_send_custom_char(enemy_spear, 3, 0);
+					} else if (enemy_position_length == 38) {
+						lcd_change_char_line2(32, 8);
+						lcd_send_custom_char(samurai_sweep, 2, 2);
+					} else if (enemy_position_length == 37) {
+						lcd_send_custom_char(enemy_sword, 6, 9);
+						lcd_send_custom_char(samurai_sweep, 2, 1);
+						lcd_change_char_line2(6, 10);
+					} else if (enemy_position_length == 36) {
+						lcd_send_custom_char(enemy_spear, 6, 5);
+					} else if (enemy_position_length == 15) {
+						lcd_send_custom_char(enemy_sword, 6, 9);
+					} else if (enemy_position_length == 14) {
+						lcd_change_char_line2(32, 10);
+						lcd_send_custom_char(samurai_sweep, 2, 2);
+					} else if (enemy_position_length == 13) {
+						lcd_change_char_line2(3, 8);
+						lcd_send_custom_char(samurai_sweep, 2, 0);
+						lcd_send_custom_char(enemy_spear, 3, 0);
+					} else if (enemy_position_length == 12) {
+						lcd_send_custom_char(enemy_spear, 3, 5);
+						if(position == 0 || position == 2 || position == 3|| position == 4 || position == 5) {
+							if(health>1) health = health - 2;
+							else health = 0;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						} else if(position == 6) {
+							health = 0;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						}
+					} else if (enemy_position_length == 2) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_sword, 3, 4);
+					} else if (enemy_position_length == 1) {
+						lcd_send_custom_char(enemy_sword, 3, 0);
+					}
+				} else if(enemy_position == 10) { // death
+					// write symbol
+					lcd_change_char_line1(32, 11);
+					if(enemy_position_length == 7) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_sword, 3, 0);
+					} else if(enemy_position_length == 7) {
+						lcd_send_custom_char(enemy_sword, 3, 2);
+					} else if(enemy_position_length == 6) {
+						lcd_send_custom_char(enemy_spear, 3, 9);
+					} else if(enemy_position_length == 5) {
+						lcd_send_custom_char(samurai_enemy_dead, 2, 0);
+						lcd_send_custom_char(samurai_enemy_dead, 3, 5);
+					} else if(enemy_position_length == 4) {
+						lcd_send_custom_char(samurai_enemy_dead, 2, 1);
+						lcd_send_custom_char(samurai_enemy_dead, 3, 6);
+					} else if(enemy_position_length == 3) {
+						lcd_send_custom_char(samurai_enemy_dead, 2, 2);
+						lcd_send_custom_char(samurai_enemy_dead, 3, 6);
+					} else if(enemy_position_length == 2) {
+						lcd_send_custom_char(samurai_enemy_dead, 2, 3);
+						lcd_send_custom_char(samurai_enemy_dead, 3, 7);
+					} else if(enemy_position_length == 1) {
+						lcd_send_custom_char(samurai_enemy_dead, 2, 4);
+					}
+				} else if(enemy_position == 12) { // mikiri countered
+					// write symbol
+					lcd_change_char_line1(32, 11);
+					// move sword
+					if (enemy_position_length == 40) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_spear, 3, 5);
+					} else if (enemy_position_length == 39) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_spear, 3, 6);
+					} else if (enemy_position_length == 38) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 2);
+						lcd_send_custom_char(enemy_spear, 3, 7);
+					} else if (enemy_position_length == 4) {
+						lcd_send_custom_char(enemy_spear, 3, 6);
+						lcd_change_char_line2(3, 8);
+					} else if (enemy_position_length == 3) {
+						lcd_send_custom_char(enemy_spear, 3, 5);
+					} else if (enemy_position_length == 2) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_sword, 3, 4);
+					} else if (enemy_position_length == 1) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_sword, 3, 0);
+					}
+				} 
 			// NAGINATA RONIN ===========================================================
 			} else if(enemy_number == 4) { // if Naginata Ronin
+				if(enemy_position_length == -1 && position == 4 && position_length > 8) {
+					enemy_position = 3;
+					enemy_position_length = 25;
+				} else if(enemy_position_length == -1 && random < 20) {
+					enemy_position = 4;
+					enemy_position_length = 25;
+				} else if(enemy_position_length == -1 && random >= 20 && random < 30) {
+					enemy_position = 7;
+					enemy_position_length = 80;
+				} else if(enemy_position_length == -1 && random >= 30 && random < 40) {
+					enemy_position = 8;
+					enemy_position_length = 25;
+				} else if(enemy_position_length == -1 && random >= 40 && random < 50) {
+					enemy_position = 9;
+					enemy_position_length = 40;
+				} 
 				if(enemy_position == 0) { // idle pose
 					// animate enemy
 					if(loop == 0) {
@@ -2164,7 +3267,329 @@ int main() {
 					} else if (loop == 10) {
 						lcd_send_custom_char(ronin_enemy_idle, 2, 1);
 					}
-				}
+				} else if(enemy_position == 3) { // parry
+					// move naginata up
+					if (enemy_position_length == 25) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+					} else if (enemy_position_length == 24) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 1);
+					} else if (enemy_position_length == 23) {
+						lcd_send_custom_char(enemy_naginata, 3, 8);
+					} else if (enemy_position_length == 22) {
+						lcd_send_custom_char(enemy_naginata, 3, 1);
+					} else if (enemy_position_length == 21) {
+						lcd_send_custom_char(ronin_enemy_parry, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 9);
+					} else if (enemy_position_length == 4) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_naginata, 3, 1);
+					} else if (enemy_position_length == 3) {
+						lcd_send_custom_char(enemy_naginata, 3, 8);
+					} else if (enemy_position_length == 2) {
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+					} else if (enemy_position_length == 1) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 0);
+					}
+				} else if(enemy_position == 4) { // attack
+					// move naginata to attack position
+					if (enemy_position_length == 25) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+					} else if (enemy_position_length == 24) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 0);
+					} else if (enemy_position_length == 23) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 8);
+					} else if (enemy_position_length == 22) {
+						lcd_send_custom_char(enemy_naginata, 3, 1);
+					} else if (enemy_position_length == 11) {
+						lcd_send_custom_char(enemy_naginata, 3, 8);
+					} else if (enemy_position_length == 10) {
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+					} else if (enemy_position_length == 9) {
+						lcd_send_custom_char(enemy_naginata, 3, 3);
+					} else if (enemy_position_length == 8) {
+						lcd_send_custom_char(enemy_naginata, 3, 2);
+						if(position == 0 || position == 1 || position == 4 || position == 5) {
+							health = health - 1;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						} else if(position == 6) {
+							health = 0;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						} else if(position == 3) {
+							enemy_posture = enemy_posture - 1;
+							lcd_change_char_line2(enemy_posture/10+48, 13);
+							lcd_change_char_line2(enemy_posture%10+48, 14);
+							if(enemy_posture == 0) {
+								enemy_position = 6;
+								enemy_position_length = 9;
+							}
+						}
+					} else if (enemy_position_length == 3) {
+						lcd_send_custom_char(enemy_naginata, 3, 3);
+					} else if (enemy_position_length == 2) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+					} else if (enemy_position_length == 1) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+						random = rnd_gen(100);
+						if(random < 25) enemy_position_length = 30;
+					}
+				} else if(enemy_position == 6) { // staggared
+					// write symbol
+					lcd_change_char_line1(32, 11);
+					// show enemy in staggared pose
+					if(enemy_position_length == 9) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+					} else if(enemy_position_length == 8) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 1);
+					} else if(enemy_position_length == 7) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_naginata, 3, 3);
+					} else if(enemy_position_length == 6) {
+						lcd_send_custom_char(enemy_naginata, 3, 2);
+					} else if(enemy_position_length == 5) {
+						lcd_send_custom_char(ronin_enemy_staggared, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 4);
+					} else if(enemy_position_length == 4) {
+						lcd_send_custom_char(ronin_enemy_staggared, 2, 1);
+						lcd_send_custom_char(enemy_naginata, 3, 5);
+					} else if(enemy_position_length == 3) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_naginata, 3, 6);
+					} else if(enemy_position_length == 2) {
+						lcd_send_custom_char(ronin_enemy_staggared, 2, 2);
+						lcd_send_custom_char(enemy_naginata, 3, 7);
+					} else if(enemy_position_length == 1) {
+						lcd_send_custom_char(ronin_enemy_staggared, 2, 3);
+						lcd_send_custom_char(enemy_naginata, 3, 7);
+					}
+				} else if(enemy_position == 7) { // heavy attack
+					// write symbol
+					lcd_change_char_line1(187, 11);
+					// move naginata to attack position
+					if (enemy_position_length == 80) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+					} else if (enemy_position_length == 79) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 0);
+					} else if (enemy_position_length == 78) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 8);
+					} else if (enemy_position_length == 77) {
+						lcd_send_custom_char(enemy_naginata, 3, 1);
+					} else if (enemy_position_length == 56) {
+						lcd_send_custom_char(enemy_naginata, 3, 8);
+					} else if (enemy_position_length == 55) {
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+					} else if (enemy_position_length == 54) {
+						lcd_send_custom_char(enemy_naginata, 3, 3);
+					} else if (enemy_position_length == 53) {
+						lcd_send_custom_char(enemy_naginata, 3, 2);
+					} else if (enemy_position_length == 52) {
+						lcd_send_custom_char(enemy_naginata, 3, 4);
+						if(position == 0 || position == 1 || position == 3|| position == 4 || position == 5) {
+							if(health>1) health = health - 2;
+							else health = 0;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						} else if(position == 6) {
+							health = 0;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						} else {
+							enemy_posture = enemy_posture - 1;
+							lcd_change_char_line2(enemy_posture/10+48, 13);
+							lcd_change_char_line2(enemy_posture%10+48, 14);
+							if(enemy_posture == 0) {
+								enemy_position = 6;
+								enemy_position_length = 9;
+							}
+						}
+					} else if (enemy_position_length == 4) {
+						lcd_send_custom_char(enemy_naginata, 3, 2);
+					} else if (enemy_position_length == 3) {
+						lcd_send_custom_char(enemy_naginata, 3, 3);
+					} else if (enemy_position_length == 2) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+					} else if (enemy_position_length == 1) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 1);
+					}
+				} else if(enemy_position == 8) { // thrust attack
+					// write symbol
+					lcd_change_char_line1(194, 11);
+					// move sword to attack position
+					if (enemy_position_length == 25) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+					} else if (enemy_position_length == 24) {
+						lcd_change_char_line2(6, 10);
+						lcd_send_custom_char(ashigaru_thrust, 6, 0);
+						lcd_send_custom_char(ronin_thrust, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 10);
+					} else if (enemy_position_length == 23) {
+						lcd_send_custom_char(ronin_thrust, 6, 1);
+						lcd_send_custom_char(ronin_thrust, 2, 2);
+						lcd_send_custom_char(ronin_thrust, 3, 5);
+					} else if (enemy_position_length == 22) {
+						lcd_send_custom_char(ronin_thrust, 6, 3);
+						lcd_send_custom_char(ronin_thrust, 2, 4);
+						lcd_change_char_line2(32, 8);
+					} else if (enemy_position_length == 21) {
+						lcd_send_custom_char(ronin_enemy_idle, 6, 2);
+						lcd_send_custom_char(enemy_naginata, 2, 14);
+					} else if (enemy_position_length == 11) {
+						lcd_send_custom_char(ronin_thrust, 6, 3);
+						lcd_send_custom_char(ronin_thrust, 2, 4);
+					}  else if (enemy_position_length == 10) {
+						lcd_send_custom_char(ronin_thrust, 6, 1);
+						lcd_send_custom_char(ronin_thrust, 2, 2);
+						lcd_change_char_line2(3, 8);
+						lcd_send_custom_char(ronin_thrust, 3, 5);
+					}  else if (enemy_position_length == 9) {
+						lcd_send_custom_char(ronin_thrust, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 10);
+					} else if (enemy_position_length == 8) {
+						lcd_send_custom_char(ashigaru_thrust, 6, 0);
+						lcd_send_custom_char(samurai_enemy_idle, 2, 2);
+						lcd_send_custom_char(enemy_naginata, 3, 15);
+					} else if (enemy_position_length == 7) {
+						lcd_change_char_line2(32, 10);
+						lcd_send_custom_char(enemy_naginata, 3, 14);
+					} else if (enemy_position_length <= 6 && enemy_position_length >= 3) {
+						lcd_send_custom_char(samurai_enemy_attack, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 13);
+						if(enemy_position_length == 3 && (position == 0 || position == 2 || position == 3 || position == 4 || (position == 5 && (position_length > 15 || position_length <= 5)))) {
+							health = health - 1;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						} else if(position == 6) {
+							health = 0;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						} else if(position == 5 && position_length <= 15 && position_length > 5) {
+							enemy_posture = enemy_posture - 1;
+							lcd_change_char_line2(enemy_posture/10+48, 13);
+							lcd_change_char_line2(enemy_posture%10+48, 14);
+							if(enemy_posture == 0) {
+								enemy_position = 6;
+								enemy_position_length = 5;
+							} else {
+								enemy_position = 12;
+								enemy_position_length = 40;
+							}
+						}
+					} else if (enemy_position_length == 2 ) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_naginata, 3, 3);
+					} else if (enemy_position_length == 1) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+					}
+				} else if(enemy_position == 9) { // sweep attack
+					// write symbol
+					lcd_change_char_line1(192, 11);
+					// move axe to attack position
+					if (enemy_position_length == 40) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+					} else if (enemy_position_length == 39) {
+						lcd_send_custom_char(samurai_sweep, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 10);
+					} else if (enemy_position_length == 38) {
+						lcd_change_char_line2(32, 8);
+						lcd_send_custom_char(samurai_sweep, 2, 2);
+					} else if (enemy_position_length == 37) {
+						lcd_send_custom_char(enemy_naginata, 6, 11);
+						lcd_send_custom_char(samurai_sweep, 2, 1);
+						lcd_change_char_line2(6, 10);
+					} else if (enemy_position_length == 36) {
+						lcd_send_custom_char(enemy_naginata, 6, 12);
+					} else if (enemy_position_length == 15) {
+						lcd_send_custom_char(enemy_naginata, 6, 11);
+					} else if (enemy_position_length == 14) {
+						lcd_change_char_line2(32, 10);
+						lcd_send_custom_char(samurai_sweep, 2, 2);
+					} else if (enemy_position_length == 13) {
+						lcd_change_char_line2(3, 8);
+						lcd_send_custom_char(samurai_sweep, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 10);
+					} else if (enemy_position_length == 12) {
+						lcd_send_custom_char(enemy_naginata, 3, 13);
+						if(position == 0 || position == 2 || position == 3|| position == 4 || position == 5) {
+							if(health>1) health = health - 2;
+							else health = 0;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						} else if(position == 6) {
+							health = 0;
+							lcd_change_char_line1(health/10+48, 1);
+							lcd_change_char_line1(health%10+48, 2);
+						}
+					} else if (enemy_position_length == 2) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 3);
+					} else if (enemy_position_length == 1) {
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+					}
+				} else if(enemy_position == 10) { // death
+					// write symbol
+					lcd_change_char_line1(32, 11);
+					if(enemy_position_length == 7) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+					} else if(enemy_position_length == 7) {
+						lcd_send_custom_char(enemy_naginata, 3, 2);
+					} else if(enemy_position_length == 6) {
+						lcd_send_custom_char(enemy_spear, 3, 9);
+					} else if(enemy_position_length == 5) {
+						lcd_send_custom_char(samurai_enemy_dead, 2, 0);
+						lcd_send_custom_char(samurai_enemy_dead, 3, 5);
+					} else if(enemy_position_length == 4) {
+						lcd_send_custom_char(samurai_enemy_dead, 2, 1);
+						lcd_send_custom_char(samurai_enemy_dead, 3, 6);
+					} else if(enemy_position_length == 3) {
+						lcd_send_custom_char(samurai_enemy_dead, 2, 2);
+						lcd_send_custom_char(samurai_enemy_dead, 3, 6);
+					} else if(enemy_position_length == 2) {
+						lcd_send_custom_char(samurai_enemy_dead, 2, 3);
+						lcd_send_custom_char(samurai_enemy_dead, 3, 7);
+					} else if(enemy_position_length == 1) {
+						lcd_send_custom_char(samurai_enemy_dead, 2, 4);
+						lcd_send_custom_char(samurai_enemy_dead, 3, 7);
+					}
+				} else if(enemy_position == 12) { // mikiri countered
+					// write symbol
+					lcd_change_char_line1(32, 11);
+					// move naginata
+					if (enemy_position_length == 40) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_spear, 3, 5);
+					} else if (enemy_position_length == 39) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_spear, 3, 6);
+					} else if (enemy_position_length == 38) {
+						lcd_send_custom_char(samurai_enemy_idle, 2, 2);
+						lcd_send_custom_char(enemy_spear, 3, 7);
+					} else if (enemy_position_length == 4) {
+						lcd_send_custom_char(enemy_spear, 3, 6);
+						lcd_change_char_line2(3, 8);
+					} else if (enemy_position_length == 3) {
+						lcd_send_custom_char(enemy_spear, 3, 5);
+					} else if (enemy_position_length == 2) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 1);
+						lcd_send_custom_char(enemy_naginata, 3, 3);
+					} else if (enemy_position_length == 1) {
+						lcd_send_custom_char(ronin_enemy_idle, 2, 0);
+						lcd_send_custom_char(enemy_naginata, 3, 0);
+					}
+				} 
 			}
 
 			// see if the enemy finished the current move
@@ -2172,7 +3597,7 @@ int main() {
 				enemy_position_length--;
 			} else if(enemy_position_length == 0 && enemy_position == 0) {
 				enemy_position_length = -1;
-			} else if(enemy_position_length == 0 && (enemy_position < 6 || enemy_position == 8 || enemy_position == 12)) {
+			} else if(enemy_position_length == 0 && (enemy_position < 6 || enemy_position == 7 || enemy_position == 8 || enemy_position == 9 || enemy_position == 12)) {
 				enemy_position = 0;
 				enemy_position_length = 10;
 				// delete symbol
@@ -2189,7 +3614,6 @@ int main() {
 			} else if(enemy_position_length == 0 && enemy_position == 6) {
 				enemy_position_length = -2;
 			}
-
 			// end the game if one died =============================================================
 			if(health == 0 && end == 0) {
 				// initialize custom chars for the player
@@ -2203,15 +3627,17 @@ int main() {
 				lcd_change_char_line1(32, 11);
 				// move player to idle position
 				lcd_change_char_line1(32, 5);
-				lcd_change_char_line1(32, 6);
-				lcd_change_char_line2(32, 7);
+				lcd_change_char_line1(68, 6);
+				lcd_change_char_line1(73, 7);
+				lcd_change_char_line1(69, 8);
+				lcd_change_char_line1(68, 9);
+				lcd_change_char_line1(32, 10);
+				lcd_change_char_line2(32, 5);
 				lcd_change_char_line2(0, 6);
 				lcd_change_char_line2(1, 7);
-				lcd_change_char_line1(32, 8);
-				lcd_change_char_line1(32, 9);
-				lcd_change_char_line2(32, 10);
 				lcd_change_char_line2(2, 9);
 				lcd_change_char_line2(3, 8);
+				lcd_change_char_line2(32, 10);
 				// move sword and player to idle position
 				lcd_send_custom_char(player_sword, 1, 0);
 				lcd_send_custom_char(player_idle, 0, 0);
@@ -2243,15 +3669,17 @@ int main() {
 				lcd_change_char_line1(32, 11);
 				// move player to idle position
 				lcd_change_char_line1(32, 5);
-				lcd_change_char_line1(32, 6);
-				lcd_change_char_line2(32, 7);
+				lcd_change_char_line1(87, 6);
+				lcd_change_char_line1(73, 7);
+				lcd_change_char_line1(78, 8);
+				lcd_change_char_line1(32, 9);
+				lcd_change_char_line1(32, 10);
+				lcd_change_char_line2(32, 5);
 				lcd_change_char_line2(0, 6);
 				lcd_change_char_line2(1, 7);
-				lcd_change_char_line1(32, 8);
-				lcd_change_char_line1(32, 9);
-				lcd_change_char_line2(32, 10);
-				lcd_change_char_line2(3, 8);
 				lcd_change_char_line2(2, 9);
+				lcd_change_char_line2(3, 8);
+				lcd_change_char_line2(32, 10);
 				// move sword and player to idle position
 				lcd_send_custom_char(player_sword, 1, 0);
 				lcd_send_custom_char(player_idle, 0, 0);
